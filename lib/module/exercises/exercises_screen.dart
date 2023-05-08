@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import '../../helper/assets_helper.dart';
 import '../../helper/helper.dart';
 import '../../helper/sound_helper.dart';
@@ -14,7 +13,7 @@ class ExercisesScreen extends StatelessWidget {
   ExercisesScreen({
     super.key,
   });
-  Map data = Get.arguments;
+  // Map data = Get.arguments;
 
   @override
   Widget build(
@@ -33,13 +32,16 @@ class ExercisesScreen extends StatelessWidget {
                 backgroundColor: Colors.grey[700],
                 flexibleSpace: FlexibleSpaceBar(
                   background: CachedNetworkImage(
-                    imageUrl: data['urlImage'],
+                    imageUrl: '',
+                    // imageUrl: data['urlImage'],
                     fit: BoxFit.cover,
                   ),
                   titlePadding:
                       EdgeInsets.symmetric(horizontal: 48.w, vertical: 16.w),
                   title: Text(
-                    data['text'],
+                    '',
+
+                    // data['text'],
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),

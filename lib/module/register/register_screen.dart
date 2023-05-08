@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:iug_app/helper/helper.dart';
 import 'package:iug_app/module/main/main_screen.dart';
 import '../../helper/assets_helper.dart';

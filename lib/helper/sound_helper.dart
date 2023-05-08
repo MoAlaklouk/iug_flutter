@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:get/get.dart';
 class SoundHelper {
   static flutterTts({required String textToSpeak}) async {
     FlutterTts flutterTts = FlutterTts();

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class DialogHelper {
   static showDialog(
@@ -10,13 +9,13 @@ class DialogHelper {
           TextStyle? descriptionStyle,
           Widget? confirm,
           Widget? cancle}) =>
-      Get.defaultDialog(
+      showDialog(
         title: title,
-        middleText: description,
+        description: description,
         backgroundColor: backgroundColor,
         titleStyle: titleStyle,
-        middleTextStyle: descriptionStyle,
+        descriptionStyle: descriptionStyle,
         confirm: confirm,
-        cancel: cancle,
+        cancle: cancle,
       );
 }

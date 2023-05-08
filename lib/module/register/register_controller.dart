@@ -1,6 +1,5 @@
 // import 'package:flutter/cupertino.dart';
-// import 'package:get/get.dart';
-
+// 
 // class RegisterConteroller extends GetxController {
 //   bool genderIsMale = true;
 //   changeGender(bool gender) {

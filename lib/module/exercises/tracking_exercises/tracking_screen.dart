@@ -6,7 +6,6 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:get/get.dart';
 
 import '../../../helper/assets_helper.dart';
 import '../../../helper/sound_helper.dart';
@@ -108,7 +107,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                         borderRadius: BorderRadius.circular(16)),
                     child: TextButton(
                         onPressed: () {
-                          Get.close(1);
+                          // Get.close(1);
                         },
                         child: Text(
                           'No',

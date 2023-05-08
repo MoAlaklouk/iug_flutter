@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../helper/assets_helper.dart';
@@ -84,7 +83,7 @@ class MainScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               // MainController.text[index],
-             '',
+              '',
               style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
