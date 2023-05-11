@@ -3,14 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iug_app/helper/helper.dart';
 import 'package:iug_app/module/main/main_screen.dart';
 import 'package:iug_app/module/register/register_controller.dart';
+import 'package:iug_app/module/register/register_screen.dart';
 import 'package:provider/provider.dart';
 import '../../helper/assets_helper.dart';
 import '../../widget/custom_widget.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
   final gkey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,7 +19,8 @@ class RegisterScreen extends StatelessWidget {
         extendBodyBehindAppBar: true,
         appBar: CustomAppBar(actions: []),
         body: ChangeNotifierProvider(
-          lazy: true,
+                            lazy:true,
+
           create: (context) => AuthConteroller(),
           builder: (context, child) {
             var controller = Provider.of<AuthConteroller>(context);
@@ -40,50 +41,47 @@ class RegisterScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(16.0.w),
+                      padding: EdgeInsets.only(
+                          right: 16.0.w, left: 16.0.w, top: .1.sh),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 200.h,
-                            alignment: Alignment.center,
-                            child: const Text(
-                              'Sport App',
-                              style:
-                                  TextStyle(fontSize: 50, color: Colors.grey),
-                            ),
+                          const Text(
+                            'Sport App',
+                            style: TextStyle(fontSize: 50, color: Colors.white),
                           ),
                           SizedBox(
-                            height: 30.h,
+                            height: 120.h,
                           ),
                           MyTextField(
-                            hint: 'email',
-                            myController:
-                                controller.regEmailTextEditingController,
-                            iconData: Icons.email,
                             textValidType: TEXT_VALID_TYPE.EMAIL,
+                            hint: 'email',
+                            iconData: Icons.email,
+                            myController:
+                                controller.logEmailTextEditingController,
                           ),
                           SizedBox(
                             height: 30.h,
                           ),
                           MyTextField(
+                            textValidType: TEXT_VALID_TYPE.PASSWORD,
+                            myController:
+                                controller.logPasswordTextEditingController,
                             hint: 'password',
-                            myController:
-                                controller.regpasswordTextEditingController,
-                            iconData: Icons.lock,
                             isPassword: true,
-                            textValidType: TEXT_VALID_TYPE.PASSWORD,
+                            iconData: Icons.lock,
                           ),
                           SizedBox(
                             height: 30.h,
                           ),
-                          MyTextField(
-                            hint: 'confirm password',
-                            myController:
-                                controller.regConPasswordTextEditingController,
-                            iconData: Icons.lock,
-                            isPassword: true,
-                            textValidType: TEXT_VALID_TYPE.PASSWORD,
+                          GestureDetector(
+                            onTap: () =>
+                                Helper.naviagtTo(context, RegisterScreen()),
+                            child: const Text(
+                              'Register now!',
+                              style:
+                                  TextStyle(fontSize: 25, color: Colors.white),
+                            ),
                           ),
                           SizedBox(
                             height: 30,
@@ -91,23 +89,12 @@ class RegisterScreen extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               if (gkey.currentState!.validate()) {
-                                if (controller.regpasswordTextEditingController
-                                        .text ==
-                                    controller
-                                        .regConPasswordTextEditingController
-                                        .text) {
-                                  controller.registNewAccount(
-                                      emailAddress: (controller
-                                          .regEmailTextEditingController.text),
-                                      password: (controller
-                                          .regpasswordTextEditingController
-                                          .text),
-                                      context: context);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      Helper.snackBar(
-                                          'the password not match'));
-                                }
+                                controller.login(
+                                    emailAddress: controller
+                                        .logEmailTextEditingController.text,
+                                    password: controller
+                                        .logPasswordTextEditingController.text,
+                                    context: context);
                               }
                             },
                             child: Container(
@@ -118,7 +105,7 @@ class RegisterScreen extends StatelessWidget {
                                 color: Colors.grey[600],
                                 borderRadius: BorderRadius.circular(16),
                               ),
-                              child: Text('Register',
+                              child: Text('Login',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,

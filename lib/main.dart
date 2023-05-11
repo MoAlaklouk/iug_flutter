@@ -1,10 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iug_app/module/main/main_screen.dart';
+import 'package:iug_app/module/register/login_screen.dart';
 
 import 'app/app.dart';
+import 'firebase_options.dart';
+import 'helper/DB.dart';
 import 'module/register/register_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Application.onInit();
+  await DbHelper.dbHelper.initDatabase();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -19,8 +31,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MaterialApp(
         navigatorKey: Application.navigatorKey,
         debugShowCheckedModeBanner: false,
-        // localizationsDelegates: L10n.localizationsDelegates,
-        home: RegisterScreen(),
+        home: Application.sharedPreferences.getBool('login') ?? false
+            ? MainScreen()
+            : LoginScreen(),
       ),
     );
   }

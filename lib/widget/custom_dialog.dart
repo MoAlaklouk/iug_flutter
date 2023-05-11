@@ -1,21 +1,48 @@
 import 'package:flutter/material.dart';
 
 class DialogHelper {
-  static showDialog(
+  static showDialogs(
           {String title = 'Confirm',
           String description = '',
           Color backgroundColor = Colors.white,
           TextStyle? titleStyle,
           TextStyle? descriptionStyle,
-          Widget? confirm,
+          Function? confirm,
+          required context,
           Widget? cancle}) =>
       showDialog(
-        title: title,
-        description: description,
-        backgroundColor: backgroundColor,
-        titleStyle: titleStyle,
-        descriptionStyle: descriptionStyle,
-        confirm: confirm,
-        cancle: cancle,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              '$title',
+              style: titleStyle,
+            ),
+            content: Text(
+              description,
+              style: descriptionStyle,
+            ),
+            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Text('confirm'),
+                onPressed: () {
+                  confirm!();
+                },
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Text('cancle'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
       );
 }

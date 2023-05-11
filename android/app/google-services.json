@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "356321110411",
+    "firebase_url": "https://iug-app-7afa7-default-rtdb.firebaseio.com",
+    "project_id": "iug-app-7afa7",
+    "storage_bucket": "iug-app-7afa7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356321110411:android:e18eb46971ef35c4cee78e",
+        "android_client_info": {
+          "package_name": "com.example.iug_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356321110411-ev03eu7sbhl4orer0hvt5rbj5tvtrl37.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbSSe-R335x7OHldNLOYipvDNcDV8A0Qc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356321110411-ev03eu7sbhl4orer0hvt5rbj5tvtrl37.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

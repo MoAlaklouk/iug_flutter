@@ -25,18 +25,29 @@ class Helper {
     );
   }
 
-  static void naviagtTo(context, Widget widget) => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => widget),
-      );
+  static Future naviagtTo(context, Widget widget) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+    );
+  }
 
-  static void naviagtTofinish(context, widget) => Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => widget,
-        ),
-        (route) {
-          return false;
-        },
+  static Future naviagtTofinish(context, widget) async {
+    await Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+      (route) {
+        return false;
+      },
+    );
+  }
+
+  static snackBar(String masg, [Color? color]) => SnackBar(
+        content: Text('$masg'),
+        backgroundColor: color ?? Colors.red,
       );
 }

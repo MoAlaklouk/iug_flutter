@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iug_app/module/main/main_screen.dart';
 
 import '../../../helper/assets_helper.dart';
+import '../../../helper/helper.dart';
 import '../../../helper/sound_helper.dart';
 
 class FinishExercisesScreen extends StatefulWidget {
@@ -14,7 +16,6 @@ class FinishExercisesScreen extends StatefulWidget {
 class _FinishExercisesScreenState extends State<FinishExercisesScreen> {
   @override
   void initState() {
-    SoundHelper.flutterTts(textToSpeak: 'congratulations');
     super.initState();
   }
 
@@ -50,7 +51,7 @@ class _FinishExercisesScreenState extends State<FinishExercisesScreen> {
                 ),
                 child: TextButton(
                     onPressed: () {
-                      // Get.offAllNamed(Routes.mainRoute);
+                      Helper.naviagtTofinish(context, MainScreen());
                     },
                     child: Text(
                       'Back to Home',

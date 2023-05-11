@@ -1,10 +1,30 @@
 class TExercises {
-  String name;
-  String imgae;
-  bool isTimer;
-  int timer;
-  int steps;
+  int? id;
+  String? name;
+  String? image;
+  bool ?isTimer;
+  int ?timer;
+  int? steps;
 
-  TExercises(this.imgae, this.name, this.isTimer,
-      {this.steps = 0, this.timer = 0});
+  TExercises( {this.id, required this.name,required this.image, required this.isTimer,
+   required   this.steps ,required this.timer });
+
+
+ TExercises.fromMap(Map map) {
+    id = map['id'];
+    name = map['name'];
+    image = map['image'] ;
+    steps = map['steps'] ;
+    isTimer = map['isTimer'] ;
+    timer = map['timer'] ;
+  }
+  toMap() {
+    return {
+      "name": name,
+      "image": image,
+      "isTimer": isTimer,
+      "timer": timer,
+      "steps": steps
+    };
+  }
 }

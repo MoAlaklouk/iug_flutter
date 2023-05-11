@@ -205,22 +205,22 @@ class _MyTextFieldState extends State<MyTextField> {
       case TEXT_VALID_TYPE.GENERAL:
         return (value) {
           if (Validator.instance.generalValidator(value)) {
-            return '* الحقل مطلوب';
+            return '* The field is required';
           }
         };
       case TEXT_VALID_TYPE.EMAIL:
         return (value) {
           if (Validator.instance.generalValidator(value)) {
-            return '* الحقل مطلوب';
+            return '* The field is required';
           }
           if (Validator.instance.emailValidator(value)) {
-            return 'الرجاء ادخال البريد الإلكتروني بالشكل الصحيح';
+            return 'Please enter a valid e-mail';
           }
         };
       case TEXT_VALID_TYPE.PASSWORD:
         return (value) {
           if (Validator.instance.generalValidator(value)) {
-            return '* الحقل مطلوب';
+            return '* The field is required';
           }
           if (Validator.instance.passwordValidator(value)) {
             return 'يجب ان يتكون من 6 احرف على الأقل';
@@ -229,7 +229,7 @@ class _MyTextFieldState extends State<MyTextField> {
       case TEXT_VALID_TYPE.PHONE:
         return (value) {
           if (Validator.instance.generalValidator(value)) {
-            return '* الحقل مطلوب';
+            return '* The field is required';
           }
           if (Validator.instance.phoneValidator(value)) {
             return 'الرجاء اخال رقم الهاتف بالصيغة الصحيحة';
@@ -239,7 +239,7 @@ class _MyTextFieldState extends State<MyTextField> {
       case TEXT_VALID_TYPE.NUMBER:
         return (value) {
           if (Validator.instance.generalValidator(value)) {
-            return '* الحقل مطلوب';
+            return '* The field is required';
           }
           if (Validator.instance.numbarValidator(value)) {
             return 'الرجاء ادخال الحقل بالشكل الصحيح';
