@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class MainController extends ChangeNotifier {
@@ -11,4 +14,41 @@ class MainController extends ChangeNotifier {
     'leg',
     'backmuscles',
   ];
+
+  List<String> tAddExercises = ['name', 'image', 'timer', 'steps'];
+  bool isTimer = false;
+  changeValueIsTimer(bool value) {
+    isTimer = value;
+    notifyListeners();
+  }
+
+  TextEditingController nameEx = TextEditingController();
+  TextEditingController imageEx = TextEditingController();
+  TextEditingController timerEx = TextEditingController();
+  TextEditingController stepsEx = TextEditingController();
+
+  PlatformFile? file;
+  File? imagePath;
+
+  pickImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        'jpg',
+        'jpeg',
+      ],
+    );
+
+    if (result != null) {
+      imagePath = File(result.files.single.path!);
+      imageEx.text = result.files.single.path!;
+      file = result.files.single;
+      notifyListeners();
+      print('file path:${imagePath!.path}');
+    } else {
+      notifyListeners();
+    }
+
+    notifyListeners();
+  }
 }

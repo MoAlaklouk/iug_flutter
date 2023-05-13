@@ -18,12 +18,15 @@ class ExercisesController extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<TExercises>? listOFExercises;
+  List<TExercises>? listOFExercises = [];
 
   getAllExercises() async {
     flipIsLoading();
     listOFExercises = await DbHelper.dbHelper.getAllStudents();
     flipIsLoading();
+    print(listOFExercises![0].isTimer);
+    print(listOFExercises![1].isTimer);
+    notifyListeners();
   }
 
   CountDownController? countDownController = CountDownController();

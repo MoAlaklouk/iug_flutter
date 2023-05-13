@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +38,6 @@ class _TrackingScreenState extends State<TrackingScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-                        lazy:true,
-
       create: (context) => ExercisesController(),
       builder: (context, child) {
         var controller = Provider.of<ExercisesController>(context);
@@ -110,9 +109,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                   height: 0.4.sh,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                    image: AssetImage(
-                      AssetsHelper.man,
-                    ),
+                    image: AssetImage(AssetsHelper.man),
                   )),
                 ),
                 SizedBox(
@@ -122,7 +119,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                   controller.listOFExercises![Utils.exerciseIndex].name!,
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
                 ),
-                controller.listOFExercises![Utils.exerciseIndex].isTimer!
+                controller.listOFExercises![Utils.exerciseIndex].isTimer == 0
                     ? Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -133,20 +130,20 @@ class _TrackingScreenState extends State<TrackingScreen> {
                               controller: controller.countDownController,
                               duration: controller
                                   .listOFExercises![Utils.exerciseIndex].timer!,
-                              onComplete: () async {
-                                if (controller.listOFExercises!.length !=
-                                    Utils.exerciseIndex) {
-                                  controller.countDownController!.pause();
-                                  SoundHelper.playAudio(AssetsHelper.ringSound);
+                              onComplete: Utils.exerciseIndex ==
+                                      controller.listOFExercises!.length - 1
+                                  ? () {
+                                      Helper.naviagtTofinish(
+                                          context, FinishExercisesScreen());
+                                    }
+                                  : () async {
+                                      SoundHelper.playAudio(
+                                          AssetsHelper.ringSound);
+                                      Helper.naviagtTo(context, BreakScreen());
+                                      controller.nextExercises();
 
-                                  await Helper.naviagtTofinish(
-                                      context, BreakScreen());
-                                  controller.nextExercises();
-                                } else {
-                                  await Helper.naviagtTofinish(
-                                      context, FinishExercisesScreen());
-                                }
-                              }),
+                                      print(Utils.exerciseIndex);
+                                    }),
                           SizedBox(
                             height: 20,
                           ),

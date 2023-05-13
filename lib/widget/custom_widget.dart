@@ -21,9 +21,10 @@ class MyTextField extends StatefulWidget {
   TextEditingController? myController;
   String? Function(String?)? validator;
   late bool noInputBorder;
+  bool? readOnly;
   ValueChanged<String>? onFieldSubmitted;
   late TextInputAction? textInputAction;
-
+  Function()? onTap;
   List<TextInputFormatter>? listInputFormatter;
   MyTextField({
     Key? key,
@@ -32,8 +33,10 @@ class MyTextField extends StatefulWidget {
     this.textInputAction,
     this.onFieldSubmitted,
     this.listInputFormatter,
+    this.readOnly,
     this.text = "",
     this.iconData,
+    this.onTap,
     this.prefixIconUrl = '',
     this.validator,
     this.noInputBorder = false,
@@ -42,25 +45,6 @@ class MyTextField extends StatefulWidget {
     this.myController,
     this.isPassword = false,
     this.isEnabled = true,
-  }) : super(key: key);
-
-  MyTextField.form({
-    Key? key,
-    required this.hint,
-    this.text = "",
-    this.noInputBorder = false,
-    this.textInputAction = TextInputAction.done,
-    this.onFieldSubmitted,
-    this.prefixIconUrl = '',
-    this.iconData,
-    this.validator,
-    this.textValidType = TEXT_VALID_TYPE.NONE,
-    this.textInputType = TextInputType.text,
-    this.myController,
-    this.isPassword = false,
-    this.isEnabled = true,
-    this.maxLines = 1,
-    this.minLines = 1,
   }) : super(key: key);
 
   @override
@@ -110,12 +94,16 @@ class _MyTextFieldState extends State<MyTextField> {
       onFieldSubmitted: widget.onFieldSubmitted,
       // style: TextStyle(color: Color(AssetsColors.color_blue_004BFE)),
       keyboardType: widget.textInputType,
+      readOnly: widget.readOnly ?? false,
       obscureText: widget.isPassword,
       maxLines: widget.maxLines,
+      onTap: () => widget.onTap!(),
+
       minLines: widget.minLines,
       enableSuggestions: !widget.isPassword,
       autocorrect: !widget.isPassword,
       enabled: widget.isEnabled,
+
       enableInteractiveSelection: true,
       style: const TextStyle(
           color: Colors.white,
@@ -127,76 +115,78 @@ class _MyTextFieldState extends State<MyTextField> {
       onChanged: (text) => setState(() => text),
       cursorColor: Colors.blueGrey,
       decoration: InputDecoration(
-          disabledBorder:
-              OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-          alignLabelWithHint: true,
-          focusedBorder: widget.noInputBorder
-              ? InputBorder.none
-              : OutlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.grey),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
-                  ),
+        disabledBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+        alignLabelWithHint: true,
+        focusedBorder: widget.noInputBorder
+            ? InputBorder.none
+            : OutlineInputBorder(
+                borderSide: BorderSide(width: 2, color: Colors.grey),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
                 ),
-          // errorStyle: AppTextStyles.getRegularTextStyle(
-          //     fontSize: 12, colorValue: AssetsColors.redColor),
-          errorBorder: widget.noInputBorder
-              ? null
-              : const OutlineInputBorder(
-                  borderSide: BorderSide(width: 0.8, color: Colors.grey),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
-                  ),
+              ),
+        // errorStyle: AppTextStyles.getRegularTextStyle(
+        //     fontSize: 12, colorValue: AssetsColors.redColor),
+        errorBorder: widget.noInputBorder
+            ? null
+            : const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
                 ),
-          enabledBorder: widget.noInputBorder
-              ? InputBorder.none
-              : const OutlineInputBorder(
-                  borderSide: BorderSide(width: 0.8, color: Colors.grey),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
-                  ),
+              ),
+        enabledBorder: widget.noInputBorder
+            ? InputBorder.none
+            : const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
                 ),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          border: widget.noInputBorder
-              ? InputBorder.none
-              : const OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.grey),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
-                  ),
+              ),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        border: widget.noInputBorder
+            ? InputBorder.none
+            : const OutlineInputBorder(
+                borderSide: BorderSide(width: 1, color: Colors.grey),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
                 ),
-          prefixIcon: widget.prefixIconUrl != ''
-              ? Padding(
-                  padding: EdgeInsetsDirectional.only(
-                      start: 20, end: 14, bottom: (widget.maxLines - 1) * 20.0),
-                  child: SvgPicture.asset(
-                    widget.prefixIconUrl,
-                    color: widget.prefixIconColor,
-                  ),
-                )
-              : widget.iconData == null
-                  ? const SizedBox(
-                      width: 16,
-                    )
-                  : Padding(
-                      padding:
-                          const EdgeInsetsDirectional.only(start: 16, end: 5),
-                      child: Icon(
-                        widget.iconData,
-                        size: 20,
-                        color: _isFocusedChanged
-                            ? Colors.blueGrey
-                            : Colors.grey[700],
-                      ),
+              ),
+        prefixIcon: widget.prefixIconUrl != ''
+            ? Padding(
+                padding: EdgeInsetsDirectional.only(
+                    start: 20, end: 14, bottom: (widget.maxLines - 1) * 20.0),
+                child: SvgPicture.asset(
+                  widget.prefixIconUrl,
+                  color: widget.prefixIconColor,
+                ),
+              )
+            : widget.iconData == null
+                ? const SizedBox(
+                    width: 16,
+                  )
+                : Padding(
+                    padding:
+                        const EdgeInsetsDirectional.only(start: 16, end: 5),
+                    child: Icon(
+                      widget.iconData,
+                      size: 20,
+                      color: _isFocusedChanged
+                          ? Colors.blueGrey
+                          : Colors.grey[700],
                     ),
-          prefixIconConstraints: BoxConstraints.loose(Size.infinite),
-          hintText: widget.hint,
-          hintStyle: const TextStyle(
-              color: Colors.white60,
-              fontSize: 12,
-              // fontFamily: AssetsHelper.FONT_Avenir,
-              fontWeight: FontWeight.w500)),
+                  ),
+
+        prefixIconConstraints: BoxConstraints.loose(Size.infinite),
+        hintText: widget.hint,
+        hintStyle: const TextStyle(
+            color: Colors.white60,
+            fontSize: 12,
+            // fontFamily: AssetsHelper.FONT_Avenir,
+            fontWeight: FontWeight.w500),
+      ),
     );
   }
 

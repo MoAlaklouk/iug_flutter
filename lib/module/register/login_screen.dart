@@ -19,8 +19,7 @@ class LoginScreen extends StatelessWidget {
         extendBodyBehindAppBar: true,
         appBar: CustomAppBar(actions: []),
         body: ChangeNotifierProvider(
-                            lazy:true,
-
+          lazy: true,
           create: (context) => AuthConteroller(),
           builder: (context, child) {
             var controller = Provider.of<AuthConteroller>(context);

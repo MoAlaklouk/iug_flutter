@@ -9,7 +9,7 @@ class DialogHelper {
           TextStyle? descriptionStyle,
           Function? confirm,
           required context,
-          Widget? cancle}) =>
+          Widget? cancel}) =>
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -36,7 +36,7 @@ class DialogHelper {
                 style: TextButton.styleFrom(
                   textStyle: Theme.of(context).textTheme.labelLarge,
                 ),
-                child: const Text('cancle'),
+                child: const Text('cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

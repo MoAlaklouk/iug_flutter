@@ -1,3 +1,4 @@
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,6 @@ class ExercisesScreen extends StatelessWidget {
   ) {
     return Scaffold(
       body: ChangeNotifierProvider(
-        lazy: true,
         create: (context) => ExercisesController(),
         builder: (context, child) {
           var controller = Provider.of<ExercisesController>(context);
@@ -98,7 +98,7 @@ class ExercisesScreen extends StatelessWidget {
     );
   }
 
-  Widget listItem(index, controller) => Column(
+  Widget listItem(index, ExercisesController controller) => Column(
         children: [
           Container(
             child: Row(children: [
@@ -108,17 +108,20 @@ class ExercisesScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               )),
               Expanded(
-                  child: Image(
-                image: AssetImage(controller.listOFExercises[index].imgae),
+                  child: Image.file(
+                File(controller.listOFExercises![index].image!),
                 height: 100,
               )),
+              SizedBox(
+                width: 20,
+              ),
               Expanded(
                   flex: 4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        controller.listOFExercises[index].name,
+                        controller.listOFExercises![index].name!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -127,11 +130,11 @@ class ExercisesScreen extends StatelessWidget {
                       SizedBox(
                         height: 5.h,
                       ),
-                      controller.listOFExercises[index].isTimer
+                      controller.listOFExercises![index].isTimer == 0
                           ? Text(
-                              '00:${controller.listOFExercises[index].timer}')
+                              '00:${controller.listOFExercises![index].timer}')
                           : Text(
-                              'X ${controller.listOFExercises[index].steps}'),
+                              'X ${controller.listOFExercises![index].steps}'),
                     ],
                   )),
             ]),

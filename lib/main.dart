@@ -11,12 +11,11 @@ import 'module/register/register_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Application.onInit();
-  await DbHelper.dbHelper.initDatabase();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Application.onInit();
+  await DbHelper.dbHelper.initDatabase();
   runApp(const MyApp());
 }
 

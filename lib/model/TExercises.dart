@@ -2,7 +2,7 @@ class TExercises {
   int? id;
   String? name;
   String? image;
-  bool ?isTimer;
+  int ?isTimer;
   int ?timer;
   int? steps;
 

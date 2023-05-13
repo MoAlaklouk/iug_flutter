@@ -21,7 +21,7 @@ class BreakScreen extends StatelessWidget {
             leading: IconButton(
                 onPressed: () {
                   DialogHelper.showDialogs(
-                    context: context,
+                      context: context,
                       description: 'Do you want to go back to Home Screen?',
                       confirm: () {
                         Helper.naviagtTofinish(context, MainScreen());
@@ -33,8 +33,7 @@ class BreakScreen extends StatelessWidget {
                 ))),
         backgroundColor: Colors.blue[100],
         body: ChangeNotifierProvider(
-                  lazy:true,
-
+          lazy: true,
           create: (context) => ExercisesController(),
           builder: (context, child) {
             var controller = Provider.of<ExercisesController>(context);

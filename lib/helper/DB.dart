@@ -31,13 +31,15 @@ class DbHelper {
     });
   }
 
-  insertNewStudent(TExercises tExercises) async {
+ Future<int>  insertNewExe(TExercises tExercises) async {
+    int rowNumber = -1;
     try {
-      int rowNumber = await database.insert(tableName, tExercises.toMap());
+      rowNumber = await database.insert(tableName, tExercises.toMap());
       log(rowNumber.toString());
     } catch (e) {
       log("row has not been inserted");
     }
+    return rowNumber;
   }
 
   Future<List<TExercises>> getAllStudents() async {
